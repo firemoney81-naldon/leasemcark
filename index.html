@@ -1,23 +1,398 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+
+ <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRental",
+    "name": "프리미엄 벤츠 GLC 장기렌트 전문 컨설팅",
+    "image": "https://도메인/glc-rent-main.png",
+    "url": "https://도메인/glc-rent",
+    "telephone": "031-123-4567",
+    "priceRange": "₩₩₩₩",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "경기도 평택시 ○○로 ○○",
+      "addressLocality": "평택시",
+      "addressRegion": "경기",
+      "postalCode": "17900",
+      "addressCountry": "KR"
+    },
+    "description": "2026 벤츠 GLC 장기렌트, 리스 최신 가격 비교 및 전문 컨설팅 서비스 제공. 합리적인 비용으로 GLC 220d, GLC 300e, GLC 쿠페 모델 선택을 도와드립니다."
+  }
+  </script>
+
+  <!-- Google Fonts: Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset and Typography */
+    body { font-family: 'Noto Sans KR', sans-serif; margin:0; padding:0; background:#f0f4f8; color:#333; line-height:1.7; font-size:16px; }
+    header, section, footer { max-width:1000px; margin:20px auto; padding:30px; background:#ffffff; border-radius:16px; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+    h1, h2, h3 { color:#0a1a3a; line-height:1.4; margin-bottom:15px; }
+    h1 { font-size:2.8rem; font-weight:900; color:#0b3d91; text-align:center; padding-top:20px; }
+    h2 { font-size:2.2rem; font-weight:700; border-bottom:3px solid #e0eafb; padding-bottom:10px; margin-top:30px; color:#1a4d8d; }
+    h3 { font-size:1.6rem; font-weight:500; color:#333; margin-top:25px; }
+    p, li { font-size:1.05rem; color:#444; }
+    ul, ol { padding-left:25px; margin-bottom:20px; }
+    li { margin-bottom:8px; }
+    strong { color:#0a1a3a; font-weight:700; }
+
+    /* Layout and Containers */
+    .container { max-width:1000px; margin:auto; }
+    .content-area { padding:20px 30px; }
+
+    /* Images */
+    .main-image { width:100%; height:400px; overflow:hidden; border-radius:16px; margin-bottom:20px; }
+    .main-image img { width:100%; height:100%; object-fit: cover; }
+    .model-image { width:100%; max-height:300px; object-fit: cover; border-radius:10px; margin-bottom:15px; }
+
+    /* Table Styling */
+    table { width:100%; border-collapse: collapse; margin:20px 0; font-size:0.95rem; }
+    th, td { border:1px solid #ddd; padding:15px; text-align:center; }
+    th { background:#e0eafb; color:#1a4d8d; font-weight:700; border-top:2px solid #a3c4ff; }
+    td { background:#ffffff; }
+    .pricing-table td:first-child { font-weight:700; text-align:left; color:#1a4d8d; }
+
+    /* Anchor Links */
+    .nav-list { list-style:none; padding:0; display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:20px; margin-bottom:20px; }
+    .nav-list li a { display:block; padding:10px 18px; background:#f0f4f8; border-radius:8px; color:#1a4d8d; font-weight:500; transition:background-color 0.3s ease; }
+    .nav-list li a:hover { background:#d4e1f7; }
+    .anchor { display:block; position:relative; top:-100px; visibility:hidden; }
+
+    /* CTA Button */
+    .btn-cta {
+      display:inline-block;
+      padding:16px 35px;
+      background:#4285f4;
+      color:#fff;
+      font-weight:700;
+      font-size:1.1rem;
+      border:none;
+      border-radius:30px;
+      box-shadow:0 6px 12px rgba(66, 133, 244, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      cursor:pointer;
+      text-decoration:none;
+      text-align:center;
+      margin-top:20px;
+    }
+    .btn-cta:hover {
+      background:#3367d6;
+      transform:translateY(-2px);
+    }
+
+    /* Input Forms */
+    form { max-width:700px; margin:auto; padding:25px; background:#f9f9f9; border-radius:12px; border:1px solid #eee; }
+    label { display:block; font-weight:700; margin-bottom:8px; color:#1a4d8d; }
+    input[type="text"], input[type="tel"], input[type="email"], select, textarea {
+      width:calc(100% - 20px);
+      padding:10px;
+      margin-bottom:15px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+      font-size:1rem;
+    }
+    textarea { resize:vertical; }
+
+    /* Section-specific styling for visual hierarchy */
+    .summary-box { background:#f5f8ff; padding:20px; border-left:4px solid #4285f4; border-radius:8px; margin-bottom:20px; }
+    .highlight { background-color: #fcebeb; color:#c0392b; padding:2px 5px; border-radius:4px; font-weight:600; }
+
+    /* Responsive Design */
+    @media(max-width:768px) {
+      body { padding:10px; font-size:15px; }
+      header, section, footer { margin:10px auto; padding:20px; border-radius:10px; }
+      h1 { font-size:2rem; }
+      h2 { font-size:1.8rem; }
+      h3 { font-size:1.4rem; }
+      .nav-list { flex-direction:column; gap:5px; align-items:center; }
+      .btn-cta { width:100%; padding:14px 0; font-size:1rem; }
+      .main-image { height:250px; }
+      th, td { padding:10px; font-size:0.9rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>벤츠 GLC 장기렌트 가격 비용 비교 및 견적 추천 서비스</h1>
+      <p style="text-align:center; color:#555; font-size:1.1rem;">2026 GLC 220d, 300e, 쿠페 모델 최저가 견적을 지금 바로 확인하세요!</p>
+      <div class="main-image">
+        <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Mercedes-Benz GLC 장기렌트">
+      </div>
+      <div style="text-align:center;">
+        <a class="btn-cta" href="#contact">GLC 렌트 실시간 견적 문의하기</a>
+      </div>
+    </header>
+
+    <nav aria-label="페이지 내 이동">
+      <ul class="nav-list">
+        <li><a href="#introduction">서비스 개요</a></li>
+        <li><a href="#models">GLC 모델별 분석</a></li>
+        <li><a href="#pricing">장기렌트 비용 및 견적</a></li>
+        <li><a href="#comparison">리스 vs 렌트 vs 구매 비교</a></li>
+        <li><a href="#checklist">장기렌트 체크리스트</a></li>
+        <li><a href="#faq">자주 묻는 질문 (FAQ)</a></li>
+        <li><a href="#contact">실시간 상담</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <section id="introduction">
+      <span id="introduction-anchor" class="anchor"></span>
+      <h2>2026 벤츠 GLC 장기렌트, 지금이 적기인 이유</h2>
+      <p>럭셔리 중형 SUV 시장의 기준인 벤츠 GLC는 세련된 디자인과 최첨단 기술로 국내에서도 꾸준히 높은 인기를 자랑하는 모델입니다. 특히 최근 <strong class="highlight">2026년형 GLC 풀체인지 모델</strong> 출시 이후, 장기렌트 시장에서는 이전 세대 모델에 대한 파격적인 할인 프로모션과 신규 모델에 대한 초기 비용 절감 혜택이 동시에 제공되고 있습니다. 현명한 소비자라면 지금이야말로 GLC를 가장 저렴한 가격으로 만나볼 수 있는 시기입니다.</p>
+
+      <h3>GLC 장기렌트의 매력 분석</h3>
+      <div class="summary-box">
+        <ul>
+          <li><strong>초기 비용 부담 감소:</strong> 차량 구매 시 필요한 취득세, 등록세, 보험료 등이 모두 월 렌탈료에 포함되어 목돈 지출이 없습니다.</li>
+          <li><strong>세금 절감 효과:</strong> 개인 사업자 및 법인 고객의 경우 월 렌탈료 전액을 손비 처리할 수 있어 절세 효과가 뛰어납니다.</li>
+          <li><strong>유지 관리 편의성:</strong> 복잡한 차량 관리와 보험 처리가 렌탈사에서 제공하는 서비스로 해결됩니다.</li>
+          <li><strong>LPG/전기차 선택 가능:</strong> 벤츠 GLC 300e (플러그인 하이브리드) 모델도 렌트로 이용 가능하며, 유류비 절감 혜택을 누릴 수 있습니다.</li>
+        </ul>
+      </div>
+      <p>저희는 벤츠 GLC를 포함한 다양한 수입차 렌트 상품을 전문적으로 취급하며, 고객님의 재정 상황과 운전 습관에 맞는 최적의 견적을 제공합니다. 벤츠 GLC 렌트와 리스 중 어떤 선택이 유리한지, <strong class="highlight">내돈내산</strong> 고객들의 <strong class="highlight">후기</strong>를 바탕으로 정확하게 분석해 드립니다.</p>
+    </section>
+
+    <section id="models">
+      <span id="models-anchor" class="anchor"></span>
+      <h2>벤츠 GLC 주요 모델별 상세 분석 (2026년 기준)</h2>
+      <p>GLC는 다양한 모델 라인업으로 출시되어 있어 고객의 주행 스타일과 예산에 따라 최적의 선택이 가능합니다. 특히 2026년 모델은 <strong class="highlight">GLC 220d</strong> (디젤), <strong class="highlight">GLC 300</strong> (가솔린), 그리고 <strong class="highlight">GLC 300e</strong> (플러그인 하이브리드)가 주력 모델입니다.</p>
+
+      <h3>1. GLC 220d 4Matic (디젤 모델)</h3>
+      <div class="content-area">
+        <img src="https://images.pexels.com/photos/17926861/pexels-photo-17926861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="GLC 220d 모델 이미지" class="model-image">
+        <p>GLC 220d는 디젤 엔진의 효율성을 극대화한 모델로, 특히 장거리 주행이 잦은 고객이나 유류비 절감을 우선시하는 분들께 추천합니다. 연비 효율이 뛰어나 <strong class="highlight">월평균 유지 비용</strong>을 절감할 수 있으며, 벤츠 특유의 안정적인 주행 질감을 느낄 수 있습니다. 렌트 시 <strong class="highlight">할인</strong>율이 높은 경우가 많아 가장 <strong class="highlight">저렴한곳</strong>을 찾으시는 분들이 선호합니다.</p>
+      </div>
+
+      <h3>2. GLC 300 4Matic (가솔린 모델)</h3>
+      <div class="content-area">
+        <img src="https://images.pexels.com/photos/15926578/pexels-photo-15926578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="GLC 300 모델 이미지" class="model-image">
+        <p>GLC 300은 가솔린 엔진 특유의 정숙성과 강력한 주행 성능을 동시에 제공합니다. 2026년형 모델에는 마일드 하이브리드 기술이 적용되어 출력과 효율이 더욱 향상되었습니다. 부드러운 승차감을 중시하는 고객에게 적합하며, <strong class="highlight">벤츠 GLC 300</strong> 모델의 <strong class="highlight">장점</strong>은 정숙성과 고급스러운 실내 디자인입니다. <strong class="highlight">GLC 쿠페</strong> 모델도 300 라인업에서 선택 가능하며, 스포티한 디자인을 선호하는 고객들에게 인기가 많습니다.</p>
+      </div>
+
+      <h3>3. GLC 300e 4Matic (플러그인 하이브리드)</h3>
+      <div class="content-area">
+        <img src="https://images.pexels.com/photos/18973315/pexels-photo-18973315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="GLC 300e 모델 이미지" class="model-image">
+        <p>미래 지향적인 선택인 GLC 300e는 플러그인 하이브리드 모델입니다. 단거리 주행 시 전기 모드로만 주행이 가능하여 <strong class="highlight">유지 비용</strong>을 획기적으로 절감할 수 있습니다. 특히 시내 주행이 많은 고객에게 <strong class="highlight">가장 추천</strong>하는 모델입니다. 정부 지원금 혜택은 없지만, 친환경차 혜택 및 공영주차장 할인 등의 이점을 누릴 수 있습니다. <strong class="highlight">GLC 300e 장단점</strong> 비교 시, 높은 초기 비용이 단점일 수 있으나 장기렌트를 통해 이 부담을 최소화할 수 있습니다.</p>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <span id="pricing-anchor" class="anchor"></span>
+      <h2>GLC 장기렌트 비용 및 견적 비교 분석</h2>
+      <p>벤츠 GLC 장기렌트 <strong class="highlight">가격</strong>은 차량 모델, 계약 기간, 초기 보증금, 약정 주행거리 등에 따라 크게 달라집니다. <strong class="highlight">평균</strong>적인 <strong class="highlight">예상 비용</strong>을 파악하여 예산 계획을 세우는 것이 중요합니다. 아래 표는 2026년 모델을 기준으로 산출된 대략적인 <strong class="highlight">견적</strong>입니다.</p>
+
+      <h3>GLC 장기렌트 월 렌탈료 예상 표 (2026년 모델 기준)</h3>
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>GLC 220d 4Matic</th>
+            <th>GLC 300 4Matic</th>
+            <th>GLC 300e 4Matic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>차량 가격 (VAT 포함)</td>
+            <td>약 7,500만 원</td>
+            <td>약 8,500만 원</td>
+            <td>약 9,000만 원</td>
+          </tr>
+          <tr>
+            <td><strong>월 렌탈료 (48개월, 보증금 20% 기준)</strong></td>
+            <td>90만 원 ~ 110만 원</td>
+            <td>105만 원 ~ 130만 원</td>
+            <td>115만 원 ~ 140만 원</td>
+          </tr>
+          <tr>
+            <td><strong>월 렌탈료 (36개월, 무보증 기준)</strong></td>
+            <td>120만 원 ~ 150만 원</td>
+            <td>140만 원 ~ 170만 원</td>
+            <td>150만 원 ~ 180만 원</td>
+          </tr>
+          <tr>
+            <td><strong>추가 비용 항목</strong></td>
+            <td colspan="3">보험료, 자동차세, 정비 서비스 포함 여부, 약정 거리 초과 비용 등</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>*위 표의 금액은 참고용이며, 정확한 <strong class="highlight">실시간 견적</strong>은 프로모션 및 렌탈사 정책에 따라 달라질 수 있습니다. <strong class="highlight">저렴한곳</strong>을 찾기 위해서는 여러 업체의 <strong class="highlight">순위</strong>와 <strong class="highlight">비교</strong>가 필수적입니다.</p>
+
+      <h3>GLC 렌트 가격 변동 요인 심층 분석</h3>
+      <ol>
+        <li><strong>계약 기간:</strong> 일반적으로 48개월, 60개월 장기 계약 시 월 렌탈료가 낮아집니다.</li>
+        <li><strong>초기 보증금/선납금:</strong> 초기 보증금을 납부하면 월 렌탈료가 낮아집니다.</li>
+        <li><strong>약정 주행거리:</strong> 연간 약정 주행거리가 길수록 렌탈료가 상승합니다. (1만km, 2만km, 3만km 등 선택)</li>
+        <li><strong>정비 서비스 포함 여부:</strong> 정비 포함 상품(풀 패키지)이 정비 불포함 상품보다 렌탈료가 높습니다.</li>
+        <li><strong>프로모션 및 재고 할인:</strong> 신규 모델 출시 시 구형 모델에 대한 <strong class="highlight">할인</strong>이 적용되거나 렌탈사별 <strong class="highlight">이벤트</strong>를 통해 <strong class="highlight">신규 가입 혜택</strong>을 받을 수 있습니다.</li>
+      </ol>
+      <div style="text-align:center;">
+        <a class="btn-cta" href="#contact">맞춤 견적으로 월 렌탈료 절감하기</a>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <span id="comparison-anchor" class="anchor"></span>
+      <h2>GLC 장기렌트 vs 리스 vs 구매, 현명한 선택은?</h2>
+      <p>벤츠 GLC를 소유하는 방법은 장기렌트, 운용리스, 할부 구매 세 가지가 있습니다. 각 방법은 <strong class="highlight">장점</strong>과 <strong class="highlight">단점</strong>이 명확하므로, 고객님의 재정 상황과 차량 운행 계획에 따라 최적의 방법을 선택해야 합니다.</p>
+
+      <h3>장기렌트 vs 리스 vs 할부 비교표</h3>
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>장기렌트</th>
+            <th>운용리스</th>
+            <th>할부 구매</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>차량 소유권</strong></td>
+            <td>렌탈사 소유 (계약 만료 후 인수 가능)</td>
+            <td>리스사 소유 (계약 만료 후 인수/반납/재리스 선택)</td>
+            <td>본인 소유</td>
+          </tr>
+          <tr>
+            <td><strong>보험 및 세금</strong></td>
+            <td>월 렌탈료에 포함 (보험료 할증 X)</td>
+            <td>월 리스료에 포함 (보험료는 본인 요율 적용)</td>
+            <td>개별 납부 (보험료 할증 O)</td>
+          </tr>
+          <tr>
+            <td><strong>하/호 번호판</strong></td>
+            <td>필수 (렌탈차량 인식 가능)</td>
+            <td>일반 번호판 (개인 차량과 동일)</td>
+            <td>일반 번호판</td>
+          </tr>
+          <tr>
+            <td><strong>주행거리 제한</strong></td>
+            <td>O (초과 시 비용 발생)</td>
+            <td>O (초과 시 비용 발생)</td>
+            <td>X</td>
+          </tr>
+          <tr>
+            <td><strong>세금 혜택 (사업자)</strong></td>
+            <td>월 렌탈료 전액 손비 처리 가능</td>
+            <td>월 리스료 전액 손비 처리 가능</td>
+            <td>감가상각비, 유류비 등 일부 경비 처리</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>선택 가이드라인</h3>
+      <ul>
+        <li><strong>장기렌트 추천 고객:</strong> 초기 비용 부담이 적고, 보험료 할증 걱정 없이 편리하게 차량을 이용하고 싶은 개인/법인 사업자. <strong class="highlight">GLC 렌트</strong>는 복잡한 서류 절차 없이 편리하게 이용 가능하며, 특히 <strong class="highlight">내돈내산</strong> 고객 후기를 보면 관리 편의성이 가장 높은 평가를 받습니다.</li>
+        <li><strong>운용리스 추천 고객:</strong> 차량 외관에 민감하여 일반 번호판을 선호하며, 보험 경력이 좋아 보험료 혜택을 받고 싶은 고객.</li>
+        <li><strong>할부 구매 추천 고객:</strong> 주행거리 제한 없이 자유롭게 차량을 이용하고 싶고, 차량을 장기간 소유할 계획인 고객.</li>
+      </ul>
+      <p>저희는 고객의 상황에 맞춰 <strong class="highlight">장기렌트 vs 리스 차이점</strong>을 상세하게 안내하고, 벤츠 GLC를 <strong class="highlight">저렴한곳</strong>에서 이용할 수 있도록 최적의 <strong class="highlight">견적</strong>을 찾아드립니다. <strong class="highlight">추천 업체</strong> 선정은 고객의 신용 등급과 원하는 조건에 따라 달라지므로, 전문가 상담이 필수입니다.</p>
+    </section>
+
+    <section id="checklist">
+      <span id="checklist-anchor" class="anchor"></span>
+      <h2>GLC 장기렌트 계약 전 필수 체크리스트</h2>
+      <ol>
+        <li><strong>약정 주행거리 확인:</strong> 자신의 연간 주행 거리를 정확하게 예측하여 초과 비용이 발생하지 않도록 합니다.</li>
+        <li><strong>만기 시 인수/반납 조건 확인:</strong> 계약 만료 시 인수 금액이 합리적인지, 반납 시 위약금이 발생하지 않는지 확인합니다.</li>
+        <li><strong>포함된 정비 서비스 범위:</strong> 소모품 교환, 엔진 오일 교환 등 정비 서비스의 범위를 꼼꼼히 체크하여 <strong class="highlight">유지 비용</strong>을 비교합니다.</li>
+        <li><strong>보험 조건 확인:</strong> 보험 연령 조건(만 21세, 26세 등), 자차 면책금 등을 확인합니다.</li>
+        <li><strong>중도 해지 수수료 확인:</strong> 부득이하게 계약을 해지할 경우 발생하는 수수료 규정을 확인합니다.</li>
+      </ol>
+      <div style="text-align:center;">
+        <a class="btn-cta" href="#contact">GLC 렌트 전문가와 계약 조건 상담하기</a>
+      </div>
+    </section>
+
+    <section id="faq">
+      <span id="faq-anchor" class="anchor"></span>
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt>Q1: 벤츠 GLC 렌트와 리스 중 어떤 것이 더 유리한가요?</dt>
+        <dd>A: 개인 사업자 및 법인이라면 장기렌트가 유리합니다. <strong class="highlight">GLC 렌트</strong>는 <strong class="highlight">월 비용</strong> 전액을 손비 처리할 수 있고, 보험 할증 걱정 없이 관리가 편리합니다. 반면 리스는 일반 번호판을 사용할 수 있어 차량의 소유 감각을 중요시하는 분에게 적합합니다.</dd>
+
+        <dt>Q2: 벤츠 GLC <strong class="highlight">장기렌트 신규 가입 혜택</strong>이나 프로모션이 있나요?</dt>
+        <dd>A: 네, <strong class="highlight">GLC 신규</strong> 계약 시 렌탈사별로 다양한 <strong class="highlight">할인</strong> 프로모션을 제공합니다. <strong class="highlight">현금 지원금</strong>이나 <strong class="highlight">사은품</strong>(블랙박스, 썬팅) 혜택도 제공되는 경우가 많습니다. 저희는 고객의 조건에 맞는 <strong class="highlight">가입 혜택</strong>을 최대로 받을 수 있도록 비교 견적 서비스를 제공합니다.</dd>
+
+        <dt>Q3: <strong class="highlight">GLC 렌트 비용</strong>을 낮추는 방법이 있나요?</dt>
+        <dd>A: 계약 기간을 48개월 이상으로 늘리거나 초기 보증금을 납부하면 월 렌탈료를 낮출 수 있습니다. 또한, <strong class="highlight">GLC 220d</strong> 모델을 선택하거나 <strong class="highlight">비수기</strong>(보통 연초)에 계약하면 더 유리한 <strong class="highlight">가격</strong>으로 이용 가능합니다. <strong class="highlight">평균</strong>적인 <strong class="highlight">견적</strong>을 확인해보세요.</dd>
+        
+        <dt>Q4: 렌트 차량도 <strong class="highlight">내돈내산 후기</strong>처럼 다양한 옵션 선택이 가능한가요?</dt>
+        <dd>A: 네, 렌트 차량도 색상이나 실내 옵션을 원하는 대로 선택하여 계약할 수 있습니다. 다만, 특정 옵션 추가 시 <strong class="highlight">월 렌탈료</strong>가 상승할 수 있으므로 <strong class="highlight">전문 업체</strong>와 충분한 상담을 통해 결정하는 것이 좋습니다.</dd>
+      </dl>
+    </section>
+
+    <section id="contact">
+      <span id="contact-anchor" class="anchor"></span>
+      <h2>벤츠 GLC 장기렌트 맞춤 견적 상담 문의</h2>
+      <p>벤츠 GLC 모델별 <strong class="highlight">가격</strong>, <strong class="highlight">비용</strong>, <strong class="highlight">견적</strong>에 대한 궁금증을 해결해 드립니다. <strong class="highlight">전문 업체</strong>의 <strong class="highlight">추천</strong>을 통해 고객님의 조건에 맞는 최적의 <strong class="highlight">GLC 렌트</strong> 상품을 찾아드립니다. 아래 양식을 작성해 주시면 <strong class="highlight">실시간 견적</strong>을 안내해 드립니다.</p>
+
+      <form action="/submit" method="POST">
+        <h3>견적 요청 정보 입력</h3>
+        <label for="name">이름<span style="color:red;">*</span></label>
+        <input type="text" id="name" name="name" required placeholder="예: 홍길동" />
+
+        <label for="phone">연락처<span style="color:red;">*</span></label>
+        <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" pattern="[0-9\-]+" />
+
+        <label for="model">희망 모델<span style="color:red;">*</span></label>
+        <select id="model" name="model" required>
+          <option value="">모델을 선택하세요</option>
+          <option value="GLC 220d 4Matic">GLC 220d 4Matic</option>
+          <option value="GLC 300 4Matic">GLC 300 4Matic</option>
+          <option value="GLC 300e 4Matic (PHEV)">GLC 300e 4Matic (PHEV)</option>
+          <option value="GLC 쿠페 (GLC Coupe)">GLC 쿠페 (GLC Coupe)</option>
+          <option value="모델 미정">모델 미정</option>
+        </select>
+
+        <label for="rent_type">희망 계약 유형<span style="color:red;">*</span></label>
+        <select id="rent_type" name="rent_type" required>
+          <option value="">유형을 선택하세요</option>
+          <option value="장기렌트">장기렌트</option>
+          <option value="운용리스">운용리스</option>
+        </select>
+
+        <label for="term">희망 계약 기간 (개월)</label>
+        <select id="term" name="term">
+          <option value="48개월">48개월</option>
+          <option value="36개월">36개월</option>
+          <option value="60개월">60개월</option>
+          <option value="기간 미정">기간 미정</option>
+        </select>
+
+        <label for="mileage">연간 약정 주행거리 (km)</label>
+        <select id="mileage" name="mileage">
+          <option value="1만 km">1만 km</option>
+          <option value="2만 km">2만 km</option>
+          <option value="3만 km">3만 km</option>
+          <option value="주행거리 미정">주행거리 미정</option>
+        </select>
+
+        <label for="additional_request">추가 요청 사항</label>
+        <textarea id="additional_request" name="additional_request" rows="4" placeholder="예: 무보증 희망, 색상 관련 문의, 법인 명의 등"></textarea>
+
+        <button type="submit" class="btn-cta">견적 문의 보내기</button>
+      </form>
+      <div style="text-align:center; margin-top:20px; font-size:0.9rem; color:#777;">
+        <p>문의 접수 시 <strong><a href="/privacy-policy" style="color:#777;">개인정보 처리 방침</a></strong>에 동의한 것으로 간주합니다.</p>
+      </div>
+    </section>
+
+      <p style="text-align:center; font-size:0.9rem; color:#888;">&copy; 2026 Premium Auto Rent Consulting. All Rights Reserved.</p>
+      <p style="text-align:center; font-size:0.8rem; color:#999;">본 웹페이지의 정보는 2026년형 벤츠 GLC 모델을 기준으로 작성되었으며, 실제 견적은 변동될 수 있습니다. <strong class="highlight">전문 업체</strong>와 상담을 통해 최종 확인하시기 바랍니다.</p>
+      <p style="text-align:center; margin-top:20px;">
+        <!-- 신뢰성 있는 외부 사이트 링크 삽입 (요청 사항) -->
+        <a href="https://www.mercedes-benz.co.kr/" target="_blank">벤츠 코리아 공식 홈페이지</a> |
+        <a href="https://namu.wiki/w/%EB%A9%94%EB%A5%B4%EC%84%B8%EB%8D%B0%EC%8A%A4-%EB%B2%A4%EC%B8%A0%20GLC" target="_blank">GLC 모델 나무위키 정보</a> |
+        <a href="https://www.fss.or.kr/" target="_blank">금융감독원 (리스/렌트 상품 안내)</a> |
+        <a href="https://www.fta.go.kr/main/business/car/" target="_blank">관세청 (수입차 관련 정보)</a> |
+        <a href="https://www.law.go.kr/LSW/main.html" target="_blank">법제처 (자동차 관련 법령)</a>
+      </p>
+
+  </div>
+  
